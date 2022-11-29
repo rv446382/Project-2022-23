@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title>grid</title>
+       <style>
+        .top-class{
+            width: 900px;
+            height: 500px;
+            border: 2px;
+            background-color: rgba(34, 103, 122, 0.623);
+            margin-left: 250px;
+            margin-bottom: 50px;
+
+
+        }
+        .main{
+
+            width: 800px;
+            height: 400px;
+           display: grid;
+            background-color: #00000093;
+            grid-template-columns: repeat(4,1fr);
+            grid-template-rows: repeat(2,1fr);
+            margin-left: 50px;
+            margin-top: 90px;
+            gap:10px;
+            text-align: center;
+
+        }
+        .main>div{
+
+            background-color: bisque;
+          }
+
+        #end2{
+            grid-row-start: 1;
+            grid-row-end: 3;
+            grid-column-start: 3;
+            grid-column-end: 4;
+
+
+        }
+        #end1{
+            grid-column-start: 1;
+            grid-column-end: 3;
+
+
+        }
+        #end3{
+            grid-row-start: 1;
+            grid-row-end: 3;
+            grid-column-start: 4;
+            grid-column-end: 5;
+
+
+        }
+
+
+       </style>
+
+
+    </head>
+
+    <body>
+        <div class="top-class">
+        <div class="main">
+           <div  id="end1">A</div>
+          <div  id="end2"> B</div>
+          <div >C</div>
+          <div  >D</div>
+
+          <div id="end3">E</div>
+
+        </div>
+
+        </div>
+
+    </body>
+</html>

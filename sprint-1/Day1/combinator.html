@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title>
+            box model
+        </title>
+        <style>
+            .container>h1{
+                text-align: center;
+                font-size: 40px;
+               
+
+           
+            }
+            .container>p{
+               text-align: center;
+               color:grey;
+        }
+            .container>div{
+                display:flex;
+            }
+            .container>div>div{
+                width:32%;
+                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                margin:2%;
+                padding:5%;
+                text-align: center;
+            }
+            .container>div>div>button{
+                padding:2%;
+                font-size:15px;
+                border:1px solid rgb(234, 220, 220);
+                color:blue;
+                background-color: white;
+            }
+            .container>div>div:nth-child(1)
+            h2{color:green;
+            }
+            .container>div>div:nth-child(2)
+            h2{color:orange;
+            }
+            .container>div>div:nth-child(3)
+            h2{color:blue;
+            }
+        
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Choose a plan that right  for your business</h1>
+            <p>we collect review from our users so  you can get an honest opinion of what an experience with
+             our website are really like!</p>
+            
+            <div>
+                <div>
+                    <h3>Starter plan</h3>
+                    <h2> Free</h2>
+                    <p>per month</p>
+                    <p>we collect review from our users so  you can get an honest opinion of what an experience with
+                        our website</p>
+                        <button>start now</button>
+                </div>
+                <div><h3>Starter plan</h3>
+                    <h2> $39.00</h2>
+                    <p>per month</p>
+                    <p>we collect review from our users so  you can get an honest opinion of what an experience with
+                        our website</p>
+                        <button>start now</button></div>
+                <div><h3>Starter plan</h3>
+                    <h2> $59.00</h2>
+                    <p>per month</p>
+                    <p>we collect review from our users so  you can get an honest opinion of what an experience with
+                        our website</p>
+                        <button>start now</button></div>
+            </div>
+
+        </div>
+    </body>
+</html>
