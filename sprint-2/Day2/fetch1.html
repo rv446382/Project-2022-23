@@ -1,0 +1,91 @@
+<html>
+    <head>
+        <title> todo </title>
+        <style>
+            
+
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 60%;
+  margin: auto;
+  margin-top: 50px;
+  text-align: center;
+}
+
+table td,
+table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+table tr:nth-child(even) {
+  background-color: #8caacf;
+}
+
+table tr:hover {
+  background-color: #ddd;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #0468aa;
+  color: white;
+  text-align: center;
+}
+
+
+        </style>
+    </head>
+    <body>
+        <h1>Todos</h1>
+        <table              >
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    
+                </tr>
+            </tbody>
+        </table>
+       
+    </body>
+</html>
+<script>
+  url = "https://jsonplaceholder.typicode.com/todos"
+ fetch(url)
+   .then((res) => res.json())
+   .then((data) => displayTable(data))
+   .catch((err) => displayErr(err));
+   function displayErr(err){
+    document.querySelector("h1").innerText =err;
+   }
+   
+
+   function displayTable(data){
+    data.forEach((elem) => {
+         console.log(data,"inside table fun");
+   
+        let tr = document.createElement("tr");
+    let td1 = document.createElement("td");
+    td1.innerText = elem.id;
+    let td2 = document.createElement("td");
+    td2.innerText = elem.title;
+    let td3 = document.createElement("td");
+    td3.innerText = elem.completed;
+    tr.append(td1,td2,td3);
+    document.querySelector("tbody").append(tr);
+    
+     });
+    
+    }
+   
+</script>

@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <title>
+            Document
+        </title>
+        <style>
+            #container{
+                display:grid;
+                grid-template-columns: repeat(4,1fr);
+                grid-template-rows: auto;
+                gap: 20px;
+                margin:20px;
+                padding:20px;
+                background-color: darksalmon;
+                
+                
+                
+            }
+            #container>div>img{
+                width:100%;
+               
+                
+                
+               
+
+            }
+            #container>div{
+                background-color: white;
+                text-align: center;
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            }
+
+        </style>
+    </head>
+    <body>
+    <div id="container"></div>
+
+    </body>
+</html>
+<script>
+     let cartItems=JSON.parse(localStorage.getItem("cartProducts"));
+     console.log(cartItems);
+     displaycard(cartItems);
+
+     let totalCost = cartItems.reduce((acc,el)=>acc+el.price,0);
+     console.log(totalCost);
+
+     function displaycard(data) {
+    document.querySelector("#container").innerHTML = "";
+    data.forEach(function(elem){
+        let div = document.createElement("div");
+
+        let imageProd = document.createElement("img");
+        imageProd.setAttribute("src",elem.image);
+
+        let title = document.createElement("h2");
+        title.innerText = elem.title;
+
+
+        let des = document.createElement("p");
+        des.innerText = elem.description;
+
+        let cost = document.createElement("p");
+        cost.innerText = elem.price;
+
+        let rating = document.createElement("p");
+        rating.innerText = elem.rating.rate;
+
+        div.append(imageProd, title ,des , cost , rating);
+        document.querySelector("#container").append(div);
+
+
+       
+        })
+
+        
+
+    
+   }
+</script>

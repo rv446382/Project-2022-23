@@ -1,0 +1,122 @@
+<html>
+    <head>
+        <title>Imageslider</title>
+<style>
+body {
+margin: 0;
+}
+.showSlider {
+display: none
+}
+.showSlider img {
+width: 100%;
+}
+.container {
+max-width: 1000px;
+position: relative;
+margin: auto;
+}
+.left, .right {
+position: absolute;
+top: 50%;
+width: auto;
+padding: 16px;
+margin-top: -22px;
+color: white;
+font-weight: bold;
+font-size: 18px;
+border-radius: 30px;
+}
+.right {
+right: 0;
+border-radius: 30px;
+}
+.left:hover, .right:hover {
+background-color: aqua;
+}
+.captiontext {
+color: teal;
+font-size: 30px;
+padding: 8px 12px;
+top: 10px;
+width: 100%;
+text-align: center;
+}
+
+
+</style>
+</head>
+<body>
+<div class="container">
+<div class="showSlider fade">
+<img src="https://www.pixelstalk.net/wp-content/uploads/images2/Wallpapers-African-Animals-Hd.jpg" alt= "Entering Library"/>
+<div class="captiontext">caption 1</div>
+</div>
+<div class="showSlider fade">
+<img src="http://eskipaper.com/images/africa-11.jpg" alt = "Select Book"/>
+<div class="captiontext">caption 2</div>
+</div>
+<div class="showSlider fade">
+<img src="https://tse2.mm.bing.net/th?id=OIP.GO2ozYAxc1LHqft5TM_JXwHaEK&pid=Api&P=0" alt="Registering ID"/>
+<div class="captiontext">caption 3</div>
+</div>
+<div class="showSlider fade">
+<img src="https://www.naturalworldsafaris.com/~/media/images/accommodation/south-africa/leopard-hills/leopard-hills-sabi-sands-reserve-elephants-in-front-of-lodge-seasons-in-africa.ashx" alt= "Returning Book"/>
+<div class="captiontext">caption 4</div>
+</div>
+<div class="showSlider fade">
+    <img src="https://tse4.mm.bing.net/th?id=OIP.nFict7SuyYB0e7hvIt-iFwHaEV&pid=Api&P=0" alt= "Returning Book"/>
+    <div class="captiontext">caption 5</div>
+    </div>
+<div class="showSlider fade">
+    <img src="https://tse2.mm.bing.net/th?id=OIP.m2HZsu6zi1_LzKiIAOogygHaE2&pid=Api&P=0" alt= "Returning Book"/>
+    <div class="captiontext">caption 6</div>
+</div>
+<div class="showSlider fade">
+    <img src="https://tse2.mm.bing.net/th?id=OIP.ERDGY36PPzaf5VePv9S87gHaE8&pid=Api&P=0" alt= "Returning Book"/>
+    <div class="captiontext">caption 7</div>
+</div>
+<div class="showSlider fade">
+    <img src="https://tse3.mm.bing.net/th?id=OIP.fSgrvgSv1roBQ1xwbyhwIgHaFF&pid=Api&P=0" alt= "Returning Book"/>
+    <div class="captiontext">caption 8</div>
+ </div>
+<div class="showSlider fade">
+    <img src="https://tse3.mm.bing.net/th?id=OIP.5fLTuuGlapYgl9AfPT-kNgHaE8&pid=Api&P=0" alt= "Returning Book"/>
+    <div class="captiontext">caption 9</div>
+</div>
+<div class="showSlider fade">
+    <img src="https://tse4.mm.bing.net/th?id=OIP.3BMw9kUfb69uFBxThyLnLwHaEK&pid=Api&P=0" alt= "Returning Book"/>
+    <div class="captiontext">caption 10</div>
+</div>
+<div class="showSlider fade">
+    <img src="https://tse3.mm.bing.net/th?id=OIP.zmpM5d-rDutRqLr1h9RnIgHaFC&pid=Api&P=0" alt= "Returning Book"/>
+    <div class="captiontext">caption 11</div>
+</div>
+                            
+
+
+<a class="left" onclick="nextSlide(-1)">❮</a>
+<a class="right" onclick="nextSlide(1)">❯</a>
+</div>
+</body>
+</html>
+<script>
+var slide_index = 1;
+slidesDisplay(slide_index);
+function nextSlide(n) {
+slidesDisplay(slide_index += n);
+}
+function currentSlide(n) {
+slidesDisplay(slide_index = n);
+}
+function slidesDisplay(n) {
+var i;
+var slides = document.getElementsByClassName("showSlider");
+if (n > slides.length) { slide_index = 1 }
+if (n < 1) { slide_index = slides.length }
+for (i = 0; i < slides.length; i++) {
+slides[i].style.display = "none";
+}
+slides[slide_index - 1].style.display = "block";
+}
+</script>

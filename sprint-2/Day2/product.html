@@ -1,0 +1,140 @@
+<html>
+    <head>
+        <title> product cart </title>
+        <style>
+            #container{
+                display:grid;
+                grid-template-columns: repeat(4,1fr);
+                grid-template-rows: auto;
+                gap: 20px;
+                margin:20px;
+                padding:20px;
+                background-color: darksalmon;
+                
+                
+                
+            }
+            #container>div>img{
+                width:100%;
+               
+                
+                
+               
+
+            }
+            #container>div{
+                background-color: white;
+                text-align: center;
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            }
+            input{
+                padding:10px 20px;
+                width:700px;
+                color:whitesmoke;
+                margin: 20px;
+                background-color: darksalmon;
+                border:none;
+               
+
+            }
+            button{
+                width:200px;
+                background-color: darksalmon;
+                border:none;
+                margin: 20px;
+                
+padding:10px 20px;
+               
+            }
+            
+        </style>
+    </head>
+    <body>
+        
+        <button><a href="cart.html">Cart</a></button>
+        <input oninput="search()" type="text" placeholder="Search products"/>
+        <select onChange="handleSort()">
+            <option value="HTL">LTH</option>
+            <option value="LTH">HTL</option>
+        </select>
+        <div id="container"></div>
+
+        
+
+    </body>
+        
+    
+</html>
+<script>
+    bag = [];
+    let cartItems = JSON.parse(localStorage.getItem("cartProducts")) ||[];
+
+    let url = " https://fakestoreapi.com/products"
+    fetch(url)
+   .then((res) => res.json())
+   .then((data) => {
+    bag = data;
+    console.log(data)
+    displaycard(data);
+   });
+   function handleSort(){
+    let selected = document.querySelector("select").value;
+    if(selected == "LTH"){
+        bag.sort((a,b)=>b.price-a.price);
+    }
+    if(selected == "HTL"){
+        bag.sort((a,b)=>a.price-b.price);
+
+    }
+    console.log(bag);
+    displaycard(bag);
+   }
+   function search(){
+    //console.log("someone typing inside input box");
+    let q = document.querySelector("input").value;
+    console.log(q);
+    let newData = bag.filter(function(elem){
+    return elem.title.toLowerCase().includes(q.toLowerCase());
+    });
+    //console.log(newData);
+     displaycard(newData);
+   }
+    
+   function displaycard(data){
+    document.querySelector("#container").innerHTML = "";
+    data.forEach(function(elem){
+        let div = document.createElement("div");
+
+        let imageProd = document.createElement("img");
+        imageProd.setAttribute("src",elem.image);
+
+        let title = document.createElement("h2");
+        title.innerText = elem.title;
+
+
+        let des = document.createElement("p");
+        des.innerText = elem.description;
+
+        let cost = document.createElement("p");
+        cost.innerText = elem.price;
+
+        let rating = document.createElement("p");
+        rating.innerText = elem.rating.rate;
+
+        let btn  = document.createElement("button");
+        btn.innerText = "Add to Cart";
+        btn.addEventListener("click",function(){
+            cartItems.push(elem)
+            localStorage.setItem("cartProducts", JSON.stringify(cartItems));
+        
+        })
+
+        div.append(imageProd, title ,des , cost , rating,btn);
+
+        document.querySelector("#container").append(div);
+
+    })
+   }
+
+  
+</script>
