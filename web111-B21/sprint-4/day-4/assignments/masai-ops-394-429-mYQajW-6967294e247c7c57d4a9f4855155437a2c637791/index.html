@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home Page</title>
+  <style>
+    /* Write all necessery css here  */
+    #product-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+
+    }
+
+    #product-container>div>img {
+      width: 80%;
+    }
+
+    /* button{
+       background-color: rgba(20, 93, 219, 0.924);
+       border: none;
+      } */
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <h1>Masai E-Commerce</h1>
+    <a href="./index.html">Home</a>
+    <a href="./cart.html">Cart</a>
+  </div>
+  <!-- Use this Select Tag for Filtering the Products  -->
+  <select id="filter">
+    <option value="">Filter By Category</option>
+    <option value="Laptop">Laptop</option>
+    <option value="Mobile">Mobile</option>
+    <option value="Speakers">Speakers</option>
+  </select>
+  <div id="product-container">
+    <!-- Here Append All the Products  -->
+  </div>
+</body>
+
+</html>
+<script>
+  // let data = JSON.parse(localStorage.getItem("data")) ;
+  // Write all necessery JS here 
+  // console.log(data)
+  let val = fetch('https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-tech-products');
+  val.then((res) => {
+    data = res.json();
+    return data;
+  })
+    .then((res) => {
+      data = res;
+      displayData(data.data)
+      //localStorage.setItem('data',JSON.stringify(data.data));
+      //console.log(res.data)
+
+    })
+
+  let filtercategory = document.getElementById("filter");
+  filtercategory.addEventListener("change", function (event) {
+
+    let selectProduct = event.target.value;
+
+    let filteredProduct = JSON.parse(localStorage.getItem("filteredProduct")) || [];
+
+
+    if (selectProduct == "Laptop") {
+      filteredProduct = data.data.filter((el) => {
+        return selectProduct == el.category;
+      })
+      localStorage.setItem("filteredProduct", JSON.stringify(filteredProduct));
+    }
+    else if (selectProduct == "Mobile") {
+      filteredProduct = data.data.filter((el) => {
+        return selectProduct == el.category;
+      })
+      localStorage.setItem("filteredProduct", JSON.stringify(filteredProduct));
+    }
+    else if (selectProduct == "Speakers") {
+      filteredProduct = data.data.filter((el) => {
+        return selectProduct == el.category;
+      })
+      localStorage.setItem("filteredProduct", JSON.stringify(filteredProduct));
+    }
+    displayData(filteredProduct);
+
+  })
+
+
+
+
+
+  function displayData(data) {
+    let parent = document.querySelector("#product-container");
+    parent.innerHTML = null;
+    data.forEach((ele) => {
+      let form = document.createElement("div");
+
+      let img = document.createElement("img");
+      img.setAttribute("src", ele.img);
+
+      let brand = document.createElement("h2");
+      brand.textContent = ele.brand;
+
+      let price = document.createElement("h3");
+      price.textContent = ele.price;
+
+
+      let details = document.createElement("p");
+      details.textContent = ele.details;
+
+
+      let category = document.createElement("p");
+      category.textContent = ele.category;
+
+
+      let btn = document.createElement("button");
+      btn.textContent = "Add To Cart";
+
+      btn.addEventListener("click", function (event) {
+
+        let cartData = JSON.parse(localStorage.getItem("cart"));
+
+        if (cartData == null) {
+          cartData = [];
+        }
+        let isAlreadyInCart = false;
+        for (let i = 0; i < cartData.length; i++) {
+          if (cartData[i].id === ele.id) {
+            isAlreadyInCart = true;
+            break;
+          };
+        }
+
+        if (isAlreadyInCart == true) {
+          alert("Product Already in Cart")
+        }
+        else {
+          cartData.push(ele);
+          localStorage.setItem("cart", JSON.stringify(cartData));
+          alert("Product Added To Cart");
+        }
+
+      })
+
+
+
+
+
+      form.append(img, brand, price, details, category, btn);
+      parent.append(form);
+    })
+
+  }
+</script>

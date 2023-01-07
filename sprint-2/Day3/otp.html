@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title> promise </title>
+    </head>
+    <body>
+        <input type="Number" placeholder="enter OTP"/>
+    <button onclick="checkOTP()"> input type </button>
+    </body>
+</html>
+
+<script>
+    function checkOTP(){
+        let OTP = document.querySelector("input").value;
+         
+       let otpPromise = new Promise(function(resolve , reject){
+       if(OTP == "1234"){
+          resolve("OTP is correct");
+        }
+        else{
+        reject("OTP is incorrect");
+      }
+     });
+      otpPromise
+        .then((fromResolve) => alert(fromResolve))
+        .catch((fromReject) => alert(fromReject));
+      }
+        
+   
+  
+
+</script>

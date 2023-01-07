@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Page</title>
+  </head>
+  <body>
+    <form>
+      <input type="text" id="name" placeholder="Account Holder Name" required/>
+      <input type="number" id="cardNo" placeholder="Enter Card No" required/>
+      <input type="number" id="cardCvv" placeholder="Enter CVV" required/>
+      <input type="submit" value="Confirm" />
+    </form>
+  </body>
+  <script>
+    let obj = JSON.parse(localStorage.getItem("obj"));
+    let form = document.querySelector("form");
+    form.addEventListener("click" , function(event){
+     event.preventDefault();
+     Form = {
+      Name : form.name.value,
+      CardNo : form.cardNo.value,
+      CVV : form.cardCvv.value,
+     };
+
+    
+    })
+
+    if(Form.Name == "" ||
+     Form.CardNo == "" ||
+     Form.cardCvv == "" ){
+      //alert("Any of the Given fields are empty");
+     }
+     else{
+       localStorage.setItem("obj" , JSON.stringify(Form));
+       //alert("payment is sucessful");
+     }
+    
+  </script>
+</html>

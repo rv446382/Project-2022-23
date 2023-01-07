@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee Dashboard</title>
+  <style>
+    /* Write all necessery styles here  */
+  </style>
+</head>
+
+<body>
+  <div id="create">
+    <h1>Hire a new Employee</h1>
+    <form>
+      <input placeholder="Employee Name" id="name" type="text" />
+      <select id="job">
+        <option value="">Select Job Role</option>
+        <option value="SDE-1">SDE-1</option>
+        <option value="SDE-2">SDE-2</option>
+        <option value="HR Manager">HR Manager</option>
+        <option value="SEO Specialist">SEO Specialist</option>
+        <option value="CA">CA</option>
+      </select>
+      <select id="department">
+        <option value="">Select Department</option>
+        <option value="Engineering">Engineering</option>
+        <option value="HR">HR</option>
+        <option value="Marketing">Marketing</option>
+        <option value="Finance">Finance</option>
+      </select>
+      <input type="number" id="salary" placeholder="Monthly salary" />
+      <input type="number" id="experience" placeholder="Prev Work Experience in Years" />
+      <input placeholder="Contact Email" id="email" type="email" />
+      <input type="submit" value="Hire" />
+    </form>
+  </div>
+  <h1>Total Active Employee:- <span id="total-employee">0</span></h1>
+  <h1>Total Cost in Salary:- <span id="total-salary">0</span></h1>
+  <table>
+    <thead>
+      <tr>
+        <td>Employee Name</td>
+        <td>Job Role</td>
+        <td>Department</td>
+        <td>salary</td>
+        <td>Contact Email</td>
+        <td>Work Experience</td>
+        <td>Role Type</td>
+        <td>Fire Employee</td>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Append all the rows here  -->
+    </tbody>
+  </table>
+</body>
+
+</html>
+
+<script>
+  // write all your necessery scripts here 
+  let DATA = [];
+  let form = document.querySelector("form");
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    let Form = {
+      Name: form.name.value,
+      Job: form.job.value,
+      Department: form.department.value,
+      Salary: form.salary.value,
+      Experience: form.experience.value,
+      Email: form.email.value,
+
+    };
+    // console.log(Form)
+    if (Form.Name == "" ||
+      Form.Job == "" ||
+      Form.Department == "" ||
+      Form.Salary == "" ||
+      Form.Email == "" ||
+      Form.Experience == "") {
+      alert("Fill all details");
+    }
+    else {
+
+      DATA.push(Form);
+      displayData(DATA);
+    }
+  });
+  console.log(DATA)
+  
+  function displayData(DATA) {
+  document.querySelector("tbody").innerHTML= "";
+  let count = 0;
+  let Total = 0;
+    DATA.forEach(function (ele, index) {
+      let tr = document.createElement('tr');
+
+
+      let td1 = document.createElement('td');
+      td1.innerText =ele.Name;
+
+      let td2 = document.createElement('td');
+      td2.innerText = ele.Job;
+
+      let td3 = document.createElement('td');
+      td3.innerText = ele.Department;
+
+      let td4 = document.createElement('td');
+      td4.innerText = ele.Salary;
+      Total += +(ele.Salary);
+      //console.log(Total);
+
+      document.getElementById("total-salary").innerText = Total;
+
+      count++;
+      document.getElementById("total-employee").innerText = count;
+
+
+      let td5 = document.createElement('td');
+      td5.innerText = ele.Email;
+
+      let td6 = document.createElement('td');
+      td6.innerText = ele.Experience;
+
+      let td7 = document.createElement('td');
+      if (ele.Experience > 5) {
+        td7.innerText = "Senior";
+      }
+      else {
+        td7.innerText = "Junior";
+      }
+
+      let td8 = document.createElement("td");
+      td8.innerText = "Delete"
+      td8.style.color = "white";
+      td8.style.backgroundColor = "red";
+      td8.style.border = "none";
+      td8.style.width = "100px";
+      td8.style.height = "30px";
+
+      td8.addEventListener("click", function () {
+        DeleteData(ele,index);
+      })
+
+      
+
+      tr.append(td1, td2, td3, td4, td5, td6, td7, td8);
+      document.querySelector("tbody").append(tr);
+
+
+    })
+    
+  }
+  function DeleteData(ele ,index) {
+        DATA = DATA.filter(function (ele , i) {
+          return i!==index; 
+        })
+        displayData(DATA);
+        //console.log("delete");
+      }
+</script>

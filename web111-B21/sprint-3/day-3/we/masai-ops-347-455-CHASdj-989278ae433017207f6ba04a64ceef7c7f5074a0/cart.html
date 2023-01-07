@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart Page</title>
+    <style>
+       #cart-container{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      #cart-container> div {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+          rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+          rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        padding: 15px;
+        height: 300px;
+      }
+      #cart-container img {
+        height: 40%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <a href="./index.html">Home</a>
+      <a href="./cart.html">Cart</a>
+      <a href="./payment.html">Payment</a>
+    </div>
+    <div>
+      <h1>Your Total cart Price is:- <span id="cart-total">0</span></h1>
+      <form >
+        <input type="text" id="cupon-filled" placeholder="masai30" />
+      <button id="cupon-active">Submit</button>
+      </form>
+      
+    </div>
+    <div id="cart-container">
+      <!-- Here Append All the cart Products  -->
+    </div>
+  </body>
+  
+</html>
+
+<script>
+    let cart_product = JSON.parse(localStorage.getItem("cart"));
+    console.log(cart_product);
+    let sum =0;
+    let TotalCost = 0;
+    let total = 0;
+    let no = 0;
+    let pro = 1;
+     cart_product.forEach(function (ele ,i){
+      
+      
+       let parent = document.querySelector("#cart-container");
+       //parent.innerHTML = "";
+      //let parent = document.querySelector("#products");
+       let div = document.createElement("div");
+       
+
+       let img = document.createElement("img");
+      img.setAttribute("src", ele[0].image_url);
+
+       let Name = document.createElement("h3");
+      Name.textContent = ele[0].name;
+       
+       let Price = document.createElement("p");
+       Price.textContent = ele[0].price;
+       total = Number(ele[0].price)
+       
+       
+      let Strikedoffprice  = document.createElement("p");
+       Strikedoffprice.textContent = ele[0].strikedoffprice;
+
+       let add = document.createElement("button");
+        add.textContent = "+";
+        add.addEventListener("click" , function(){
+        ele[1]++;
+        localStorage.setItem("cart" , JSON.stringify(cart_product));
+         window.location.reload();
+       });
+
+       let qty = document.createElement("span");
+       qty.textContent = ele[1];
+        no = qty.textContent;
+
+       
+       let minus = document.createElement("button");
+       minus.textContent = "-";
+       minus.addEventListener("click" , function(){
+          if(ele[1]<=1){
+            cart_product.splice(i,1);
+            localStorage.setItem("cart" , JSON.stringify(cart_product));
+            window.location.reload();
+          }
+          else{
+            ele[1]--;
+            localStorage.setItem("cart" , JSON.stringify(cart_product));
+            qty.textContent--;
+            window.location.reload();
+
+          }
+      });
+     // console.log(no)
+     // console.log(total)
+      pro = no*total
+      TotalCost += pro;
+      
+
+      div.append(img ,Name , Price ,Strikedoffprice ,add ,qty,minus);
+      parent.append(div);
+      cartTotal = document.querySelector("#cart-total").textContent = TotalCost;
+      console.log(cartTotal);
+      
+      let cuponBtn =  document.querySelector("#cupon-active");
+      cuponBtn.addEventListener("click" , function(event){
+        event.preventDefault()
+        let cupon = document.querySelector("#cupon-filled").value;
+        if(cupon !=="masai30"){
+      //alert("Wrong Cupon code ");
+      cartTotal = document.querySelector("#cart-total").textContent = "Wrong Cupon code";
+    }
+    else{
+      //alert("Correct Cupon code");
+      sum = TotalCost - Math.floor(TotalCost*0.3)
+      cartTotal = document.querySelector("#cart-total").textContent = sum;
+    }
+  
+      //console.log(typeof cupon)
+      
+      
+      //console.log(cartTotal);
+      //console.log(sum)
+      })
+
+      //window.location.reload();
+     })
+     
+     
+     
+      
+    
+
+  //console.log(cupon)
+ 
+
+
+     
+</script>

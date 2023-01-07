@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <style>
+      /* Write all necessery css here  */
+
+      #product-container{
+                display:grid;
+                grid-template-columns: repeat(4,1fr);
+                grid-template-rows: auto;
+                gap: 20px;
+                margin:20px;
+                padding:20px;
+                background-color: darksalmon;
+                
+                
+                
+            }
+            #product-container>div>img{
+                width:100%;
+               
+                
+                
+               
+
+            }
+            #product-container>div{
+                background-color: white;
+                text-align: center;
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            }
+            .nav{
+              display: flex;
+              background-color: whitesmoke;
+              justify-content: space-evenly;
+              box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            }
+            .nav>div:nth-child(2){
+              padding: 30px;
+            }
+            .nav>div:nth-child(3){
+              padding: 30px;
+            }
+           
+    </style>
+  </head>
+
+  <body>
+    <div class="nav">
+      <div> <h1>Masai E-Commerce</h1></div>
+      <div>  <a href="./index.html">Home</a></div>
+      <div> <a href="./cart.html">Cart</a></div>
+    
+    </div>
+    <br>
+    <!-- Use this Select Tag for Filtering the Products  -->
+    <select  onchange="handleSort()">
+      <option value="">Filter By Category</option>
+      <option value="Laptop">Laptop</option>
+      <option value="Mobile">Mobile</option>
+      <option value="Speakers">Speakers</option>
+    </select>
+    <div id="product-container">
+      <!-- Here Append All the Products  -->
+     
+    </div>
+   
+  </body>
+  
+</html>
+<script>
+    // Write all necessery JS here 
+    let bag = [];
+    let cartItems = JSON.parse(localStorage.getItem("cartProducts"))||[];
+    let url = " https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-tech-products";
+    fetch(" https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-tech-products")
+    .then((res)=> res.json())
+    .then((data) => {
+     bag = data;
+      //console.log(data);
+      displayCard(data);
+    })
+      
+    function handleSort(){
+      let selected = document.querySelector("select").value;
+      if(selected=="Laptop"){
+        
+        console.log("Laptop");
+      }
+      else if(selected=="Mobile"){
+       
+        console.log("mobile");
+      }
+      else{
+      
+        console.log("Speakers");
+      }
+    }
+   
+    
+    function displayCard(data){
+      //document.querySelector("product-container").innerHTML = "";
+      //console.log(data.data);
+     data.data.forEach(function(element) {
+
+      let div = document.createElement("div");
+
+        letimgProd = document.createElement("img");
+        imgProd.setAttribute("src" , element.img);
+
+        let brand = document.createElement("h2");
+        brand.innerText = element.brand;
+
+        let price = document.createElement("h3");
+         price.innerText =element.price;  
+
+        let Details= document.createElement("p");
+        Details.innerText = element.details;
+
+        let Category= document.createElement("p");
+        Category.innerText = element.category;
+
+        let but = document.createElement("button");
+         but.innerText = "add to cart";
+         but.addEventListener("click" , function(){
+            cartItems.push(element);
+            localStorage.setItem("cartProducts",JSON.stringify(cartItems));
+         });
+
+
+        div.append(imgProd , brand , price ,Details , Category ,but);
+
+        document.querySelector("#product-container").append(div);
+    });
+        
+      
+    }
+
+    
+  </script>

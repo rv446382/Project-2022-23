@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web-111 C1</title>
+    <style>
+      #container{
+        width: 100%;
+        margin: 50 auto;
+        background-color: lightgrey;
+      }
+      h1,h2 ,#H3{
+        text-align: center;
+        font-size: 30px;
+
+      }
+      p{
+        text-align: center;
+        font-size: 20px;
+      }
+      #banner{
+        display: flex;
+        text-align: left;
+        width: 100%;
+        gap: 10px;
+       
+
+      }
+      #banner>div{
+        width: 50%;
+        padding-left: 50px;
+        margin-bottom: 30px;
+      }
+      #banner>div>img{
+        width: 80%;
+        
+      }
+      button{
+        background-color: rgba(225, 107, 17, 0.95);
+        border: none;
+        height: 30px;
+        color: white;
+      }
+      #button1{
+        background-color: white;
+        border: none;
+        height: 30px;
+        color:rgba(225, 107, 17, 0.95); ;
+      }
+      #services{
+        display: grid;
+        grid-template-columns: repeat(3 ,1fr);
+        margin-left: 50px;
+        margin-bottom: 40px;
+        width: 100%;
+        gap: 10px;
+        
+      }
+      #H2  {
+        text-align: left;
+      }
+      #more{
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        margin: 30px;
+        gap: 20px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        
+      }
+      #more div{
+        width: 80%;
+        height: 50px;
+        background-color: white;
+        
+        padding: 10px;
+       
+      }
+      span{
+        color: #13a5dfee;
+        font-size: 20px;
+      }
+      
+      #P1{
+        font-size: 20px;
+      }
+
+
+      
+      @media only screen and (min-width: 451px) and (max-width: 800px) {
+        /* medium screen sizes  */
+        #banner{
+          flex-direction: column;
+        }
+        #services{
+          grid-template-columns: repeat(2,1fr);
+        }
+      }
+      #more{
+        
+        grid-template-columns: repeat(2,1fr);
+      }
+      @media only screen and (min-width: 10px) and (max-width: 450px) {
+        /* Small screen sizes  */
+        #banner{
+          flex-direction: column;
+        }
+        #services{
+          grid-template-columns: repeat(1,1fr);
+        }
+        #more{
+        
+        grid-template-columns: repeat(1,1fr);
+      }
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Build a Website with ease</h1>
+      <p>So You Focus on what matters</p>
+      <div id="banner">
+        <!-- Use flex to create this part. You have two parts here one div for the texts and button and one image  -->
+       <div>
+         <H2 id="H2"> Marketers </H2>
+         <p1>Lorem ipsum dolor sit amet consectetur adipisicing <br>elit. Commodi, beatae non,<br>dolores quia perferendis laudantium! Natus<br>reiciendis, dolorum vero facilis a earum. Dolore,<br> quisquam voluptatibus consequuntur nulla quod!</p1><br>
+         <br>
+         <button> Get Started free </button>
+         <button id="button1"> Get a DEMO </button>
+        </div>
+
+        <div> <img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-11-16/Screenshot%202022-07-28%20at%2010.41.35%20AM_137675.png" alt=""></div>
+      </div>
+      <h2>Features that make this possible:</h2>
+      <div id="services">
+        <!-- Here You should have 6 children divs. Use grid to create the layout  -->
+      <div>
+        <h3 > CEO Recommandation </h3>
+        <P1> Easily see how can you improve your site and take <br> action , all in one with the CEO Recommandation<br> Home Screen</P1>
+      </div>
+      <div>
+        <h3> CEO Recommandation </h3>
+        <P1> Easily see how can you improve your site and take <br> action , all in one with the CEO Recommandation<br> Home Screen</P1>
+      </div>
+      <div>
+        <h3> CEO Recommandation </h3>
+        <P1> Easily see how can you improve your site and take <br> action , all in one with the CEO Recommandation<br> Home Screen</P1>
+      </div>
+      <div>
+        <h3> CEO Recommandation </h3>
+        <P1> Easily see how can you improve your site and take <br> action , all in one with the CEO Recommandation<br> Home Screen</P1>
+      </div>
+      <div>
+        <h3> CEO Recommandation </h3>
+        <P1> Easily see how can you improve your site and take <br> action , all in one with the CEO Recommandation<br> Home Screen</P1>
+      </div>
+      <div>
+        <h3> CEO Recommandation </h3>
+        <P1> Easily see how can you improve your site and take <br> action , all in one with the CEO Recommandation<br> Home Screen</P1>
+      </div>
+      </div>
+      <h3 id="H3">But wait there is more...</h3>
+      <div id="more">
+        <!-- Here You should have 8 children divs. Use grid to create the layout  -->
+        <div><p1 id="P1"> <span> <b>></b> </span> <b>Multi-Languages Centent Creation</b></p1></div>
+        <div> <p1 id="P1"> <span> <b>></b> </span><b>Multi-Languages Centent Creation</b></p1></div>
+        <div> <p1 id="P1"> <span> <b>></b> </span> <b>Multi-Languages Centent Creation</b></p1></div>
+        <div> <p1 id="P1"> <span> <b>></b> </span> <b>Multi-Languages Centent Creation</b></p1></div>
+        <div> <p1 id="P1"> <span> <b>></b> </span> <b>Multi-Languages Centent Creation</b></p1></div>
+        <div> <p1 id="P1"> <span> <b>></b> </span> <b>Multi-Languages Centent Creation</b></p1></div>
+        <div > <p1 id="P1"> <span> <b>></b> </span> <b>Multi-Languages Centent Creation</b></p1></div>
+        <div> <p1 id="P1"> <span> <b>></b> </span> <b>Multi-Languages Centent Creation</b></p1></div>
+      </div>
+    </div>
+  </body>
+</html>

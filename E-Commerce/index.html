@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <style>
+        #container{
+            width: 90%;
+            margin: auto;
+        }
+        #banner{
+            display: flex;
+            justify-content: space-between;
+        }
+        #banner>div:nth-child(2){
+            display: grid;
+            gap: 5px;
+            align-content: center;
+            grid-template-columns: repeat(2,1fr);
+        }
+        #products{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 20px;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+
+        <div id="banner">
+          <div>
+            <h1>Welcome <span></span></h1>
+          </div>
+          <div>
+            <button>Logout</button>
+            <button>Go to Cart</button>
+          </div>
+        </div>
+        <div id="products"></div>
+    </div>
+  </body>
+</html>
+<script>
+  // 1. catch the span
+  // 2. get username from local storage
+  // 3. change the textContent of span.
+//   we created some array with dummy products.
+//  we stored this array in our local storage.
+// we deleted this array from the script file to make it look good.
+// we tried to get the stored products data from local storage.
+// we ran a forEach loop inside the data array and create cards and appended them to parent
+
+  document.querySelector("div>h1>span").textContent =
+    localStorage.getItem("username");
+    let storedProducts = JSON.parse(localStorage.getItem('products'))
+    storedProducts.forEach(function(el){
+        let parent = document.querySelector('#products');
+        let card = document.createElement('div');
+        let img = document.createElement('img');
+        img.setAttribute('src',el.imageUrl);
+        let name = document.createElement('p');
+        name.textContent = el.name;
+        let price = document.createElement('p');
+        price.textContent = el.price;
+        let cartBtn = document.createElement('button');
+        cartBtn.textContent= "Add to Cart";
+        card.append(img,name,price,cartBtn);
+        parent.append(card);
+    })
+   
+</script>

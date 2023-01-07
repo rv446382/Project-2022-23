@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart Page</title>
+    <style>
+      /* Write all necessery css here  */
+      #cart-container{
+                display:grid;
+                grid-template-columns: repeat(4,1fr);
+                grid-template-rows: auto;
+                gap: 20px;
+                margin:20px;
+                padding:20px;
+                background-color: darksalmon;
+                
+                
+                
+            }
+            #cart-container>div>img{
+                width:100%;
+               
+                
+                
+               
+
+            }
+            #cart-container>div{
+                background-color: white;
+                text-align: center;
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            }
+      .nav{
+              display: flex;
+              background-color: whitesmoke;
+              justify-content: space-evenly;
+              box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            }
+           
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <h1>Masai E-Commerce</h1>
+      <a href="./index.html">Home</a>
+      <a href="./cart.html">Cart</a>
+    
+      
+    </div>
+    <h1 id="total">Your Total cart Price is:- <span id="cart-total">0</span></h1>
+    <div id="cart-container">
+      <!-- Here Append All the cart Products  -->
+    </div>
+  </body>
+  
+</html>
+
+<script>
+
+  // Write all necessery JS here 
+  let cartItems = JSON.parse(localStorage.getItem("cartProducts"));
+  console.log(cartItems);
+  displayCard(cartItems);
+
+
+  let totalCost = cartItems.reduce((acc,element) => acc+element.price,0);
+  console.log(totalCost);
+
+ 
+
+  function displayCard(data){
+    document.querySelector("#cart-container").innerHTML = "";
+    //console.log(data.data);
+   data.forEach(function(element) {
+
+    let div = document.createElement("div");
+
+    let imgProd = document.createElement("img");
+    imgProd.setAttribute("src" , element.img);
+
+
+      let brand = document.createElement("h2");
+      brand.innerText = element.brand;
+
+      let price = document.createElement("h3");
+       price.innerText =element.price;  
+
+      let Details= document.createElement("p");
+      Details.innerText = element.details;
+
+      let Category= document.createElement("p");
+      Category.innerText = element.category;
+
+      div.append(imgProd , brand , price ,Details , Category );
+
+      document.querySelector("#cart-container").append(div);
+  });
+      
+    
+  }
+
+  
+</script>

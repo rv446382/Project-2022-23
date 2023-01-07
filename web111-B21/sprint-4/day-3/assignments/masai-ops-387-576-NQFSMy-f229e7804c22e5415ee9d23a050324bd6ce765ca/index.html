@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web Movie App</title>
+    <style>
+      /* Write necessery styles here  */
+    </style>
+  </head>
+  <body>
+    <div id="serach">
+      <input type="text" id="search-inp"/>
+      <button   id="search-btn">Search</button>
+    </div>
+    <div id="movie_container"></div>
+  </body>
+
+ 
+</html>
+<script>
+ // https://www.omdbapi.com/?i=tt3896198&apikey=d9b44d52
+  let bag =JSON.parse(localStorage.getItem("data")) ||[];
+  
+  let val = fetch('https://fakestoreapi.com/products');
+  // val.then(res => {
+  //   //console.log(res);
+  //   data = res.json()
+  //   return data;
+  // })
+
+  //   .then((res) => { res = data;
+  //    console.log(data);
+  //    displayData(data);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   })
+
+  val.then((res) => res.json())
+   .then((data) => {
+     bag = data;
+    //console.log(bag)
+    localStorage.setItem("data",JSON.stringify(data));
+    //displayData(data);
+   });
+
+  //console.log(bag)
+
+    let searchbtn = document.getElementById("search-btn");
+    
+    searchbtn.addEventListener("click", function (event) {
+        event.preventDefault();
+// console.log("w")
+       //let input = document.getElementById("search-inp").value;
+       //function search(){
+         let q = document.getElementById("search-inp").value;
+        console.log(q);
+        console.log(bag)
+         let newData = bag.filter(function(elem){
+            return elem.category.toLowerCase().includes(q.toLowerCase());     
+              });
+        console.log(newData);
+        displayData(newData);
+
+           
+            }
+
+       
+        
+      )
+      
+        function displayData(data) {
+          let parent = document.querySelector("#movie_container");
+          parent.innerHTML = null;
+          data.forEach((ele) => {
+            let form = document.createElement("div");
+
+            let title = document.createElement("h2");
+            title.textContent = ele.category;
+
+
+            let img = document.createElement("img");
+            img.setAttribute("src" ,ele.image )
+
+            form.append(title,img);
+            parent.append(form);
+          })
+             }
+
+            
+    
+      
+</script>

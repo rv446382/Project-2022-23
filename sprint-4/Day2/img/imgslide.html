@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    var i = 0;
+    var images = [];
+    var time = 2000;
+
+    images[0] = "th (1).jpeg";
+    images[1] = "th (2).jpeg";
+    images[2] = "th (3).jpeg";
+    images[3] = "th (4).jpeg";
+    images[4] = "th (5).jpeg";
+    images[5] = "th (6).jpeg";
+    images[6] = "th (7).jpeg";
+    images[7] = "th (8).jpeg";
+    images[8] = "th (9).jpeg";
+    images[9] = "th (10).jpeg";
+    images[10] = "th (11).jpeg";
+    images[11] = "th (12).jpeg";
+    images[12] = "th (13).jpeg";
+    images[13] = "th (14).jpeg";
+    
+    
+   
+
+
+
+
+    function changeImg(){
+        document.slide.src = images[i];
+
+        if(i<images.length-1){
+            i++;
+        }else{
+            i = 0;
+        }
+        setTimeout("changeImg()",time);
+    }
+    window.onload = changeImg;
+    
+
+
+
+
+
+</script>
+<img name = "slide"width="400" height="200">

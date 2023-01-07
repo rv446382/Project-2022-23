@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign in Page</title>
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <a href="./index.html">Signup</a>
+      <a href="./signin.html">Signin</a>
+    </div>
+    <div >
+      <h1 id="heading">Please Enter Your Details</h1>
+      <form id="signin">
+        <input type="email" id="email1" placeholder="Email" required/><br>
+        <input type="password" id="password1" placeholder="********" required/><br>
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+  </body>
+  
+</html>
+<script src="./script.js">
+  
+  // let signIn = document.querySelector("form");
+  //   signIn.addEventListener("submit", function (event) {
+  //       event.preventDefault();
+  //       let count = 0;
+  //       // we are creating a temp var to store user who is trying to login
+  //       let temp;
+  //       // we are checking whether the user is registered or not
+  //       users.forEach(function (el) {
+  //           console.log(el.email)
+  //       //   if (el.email === signIn.email1.value) {
+  //       //     count++;
+
+  //       //     // when count is incremented or we found user, we are storing the user data;
+  //       //     temp = el;
+  //       //     // we are storing the user in our local storage so that we can access user data from different pages
+  //       //     localStorage.setItem('loggedUser',JSON.stringify(el));
+  //        // }
+  //       });
+  //       // if we didn't find any user we alert
+  //       if (count == 0) {
+  //         alert("user not registered!");
+  //       }
+  //       // if we find user we check the password
+  //        else {
+  //           // we check the temp password with form password
+  //         if (temp.password != signIn.password1.value) {
+  //           alert("wrong password");
+  //         } else {
+  //           alert("login successful!");
+  //           // we can use n number of methods to change the page. here we are using assign() method
+  //           // window.location.assign('url')
+  //           window.location.assign("./index.html");
+  //         }
+  //       }
+  //       console.log(signIn.password1.value,signIn.email1.value)
+  //     });
+</script>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventory Management</title>
+  <style>
+      /* Write all necessery css here  */
+  </style>
+</head>
+
+<body>
+  <div id="create">
+    <h1>Add Products in Inventory</h1>
+    <form>
+      <input placeholder="Product Name" id="name" type="text" />
+      <select id="category">
+        <option value="">Product Catagory</option>
+        <option value="Grocery">Grocery</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Fashion">Fashion</option>
+        <option value="Home Appliances">Home Appliances</option>
+      </select>
+      <input type="text" id="brand" placeholder="Brand" />
+      <input placeholder="Product Price" id="price" type="number" />
+      <select id="deliveredBy">
+        <option value="">Delivered By</option>
+        <option value="Plane">Plane</option>
+        <option value="Ship">Ship</option>
+        <option value="Delivery Van">Delivery Van</option>
+      </select>
+      <input type="submit" value="Add Inventory" />
+    </form>
+  </div>
+  <!-- This is the h1 tag for showing the total price  -->
+  <h1 id="total-price">Total Price:- 0</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Catagory</th>
+        <th>Brand</th>
+        <th>Price</th>
+        <th>Delivered By</th>
+        <th>Price Segment</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody id="Tbody">
+      <!-- Here you will append the data as tr-td when the form gets submitted  -->
+    </tbody>
+  </table>
+</body>
+
+
+</html>
+
+<script>
+  // Write all necessery JS Here 
+     
+     let form = document.querySelector('form');
+     form.addEventListener('submit' , function(event){
+      event.preventDefault();
+      let Form= {
+      Name : form.name.value,
+      Category : form.category.value,
+      Brand : form.brand.value,
+      Price : form.price.value,
+      Delivered : form.deliveredBy.value,
+
+    }
+    if(Form.Name == "" ||
+    Form.Category == "" ||
+    Form.Brand == "" ||
+    Form.Price == "" ||
+    Form.Delivered == "" ){
+      alert("Fill all input fields");
+    }
+    else{
+     
+      displayCard(Form);
+    }
+  })
+ console.log()
+ let totalprice = 0;
+    function displayCard(product_data){
+    
+     let tr = document.createElement("tr");
+
+     let td1 = document.createElement("td");
+      td1.innerText = product_data.Name;
+       
+     let td2 = document.createElement("td");
+     td2.innerText = product_data.Category;
+
+     let td3 = document.createElement("td");
+     td3.innerText = product_data.Brand;
+
+     let td4 = document.createElement("td");
+     td4.innerText =product_data.Price;
+     
+     let td5 = document.createElement("td");
+     td5.innerText =product_data.Delivered;
+
+     let td6 = document.createElement("td");
+    if(product_data.Price>1000){
+      td6.innerText = "Expensive";
+    }
+    else{
+      td6.innerText = "Not-Expensive";
+    }
+
+     let td7 = document.createElement("button");
+     td7.innerText = "Delete";
+     td7.addEventListener('click', function(){
+       Delete(index);
+    });
+       
+    function Delete(ele , index){
+      product_data = product_data.filter(function (ele , i){
+         return i!==index;
+      })
+      displayCard( product_data);
+    }
+     tr.append(td1,td2,td3,td4,td5,td6,td7);
+    document.querySelector("#Tbody").append(tr);
+    totalprice += +(product_data.Price);
+     document.querySelector("#total-price").innerText = "Total Price :-" + totalprice;
+     console.log(totalprice)
+    }
+    
+</script>

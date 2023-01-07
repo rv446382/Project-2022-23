@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home Page</title>
+  <style>
+    /* All Your css for Home page goes here  */
+    #restaurant-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <h1>Masai Restaurant Finder</h1>
+    <a href="./index.html">Home</a>
+    <a href="./favourites.html">Favourites</a>
+  </div>
+  <select id="filter">
+    <option value="">Filter By Category</option>
+    <option value="cafe">cafe</option>
+    <option value="ethnic">ethnic</option>
+    <option value="fast_food">fast_food</option>
+  </select>
+  <h1 id="alert"></h1>
+  <div id="restaurant-container">
+    <!-- Here Append All the Products  -->
+  </div>
+</body>
+<script>
+
+  let alert = document.querySelector("#alert");
+  const url = `https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/getrestaurants?limit=30`;
+  // All your JS code for Home Page goes here
+  let data = JSON.parse(localStorage.getItem("data")) || [];
+  //displayData(data)
+  console.log(data)
+  let val = fetch(url);
+  val.then((res) => {
+
+    data = res.json()
+    return data
+  })
+
+    .then(res => {
+      data = res;
+      //console.log(data.data)
+      displayData(data.data)
+      localStorage.setItem("data", JSON.stringify(data.data));
+    })
+
+
+    .catch((error) => {
+      console.log(error)
+    })
+
+  let res = document.querySelector("#filter");
+
+  res.addEventListener("change", function (event) {
+    //event.preventDefault();
+    let selectedProduct = event.target.value;
+    //console.log(selectedProduct)
+   // console.log(data)
+    let filteredProduct = JSON.parse(localStorage.getItem("filteredProduct"))||[];
+    filteredProduct = data.data;
+    //console.log(filteredProduct)
+    if (selectedProduct == "cafe") {
+      filteredProduct = data.data.filter((el) => {
+        return selectedProduct == el.type;
+      })
+      localStorage.setItem("filteredProduct", JSON.stringify(filteredProduct))
+    }
+
+    else if (selectedProduct == "ethnic") {
+      filteredProduct = data.data.filter((el) => {
+        return selectedProduct == el.type;
+      })
+      localStorage.setItem("filteredProduct", JSON.stringify(filteredProduct))
+    }
+
+    else {
+      filteredProduct = data.data.filter((el) => {
+        return selectedProduct == el.type;
+      })
+      localStorage.setItem("filteredProduct", JSON.stringify(filteredProduct))
+
+    }
+
+    displayData(filteredProduct);
+  })
+
+  function displayData(data) {
+    let parent = document.querySelector("#restaurant-container");
+    parent.innerHTML = null;
+    data.forEach((ele) => {
+      let form = document.createElement("div");
+
+      let img = document.createElement("img");
+      img.setAttribute("src", ele.image);
+
+      let name = document.createElement("h2");
+      name.textContent = ele.name;
+
+      let price = document.createElement("h4");
+      price.textContent = "₹" + ele.price_starts_from;
+
+
+      let type = document.createElement("p");
+      type.textContent = ele.type;
+
+      let rating = document.createElement("p");
+      rating.textContent = ele.rating;
+
+      let btn = document.createElement("button");
+      btn.textContent = "Favourites";
+
+      btn.addEventListener("click", function (event) {
+        //event.preventDefault();
+         let favourites = JSON.parse(localStorage.getItem("fav"))||[]; 
+         if(favourites ==null)  favourites = [];
+         
+         
+         let alreadyInCart = false;
+         for(let i=0;i<favourites.length;i++){
+          if(favourites[i].id == ele.id){
+            alreadyInCart = true;
+            break;
+          };
+         }
+         if(alreadyInCart == true){
+          alert.textContent = "Restaurant Already in Favourites" ;
+         }
+         else{
+        favourites.push(ele);
+          localStorage.setItem("fav" ,JSON.stringify(favourites));
+         
+          alert.textContent ="Restaurant Added To Favourites";
+         }
+        
+      })
+
+      form.append(img, name, price, type, rating, btn);
+      parent.append(form);
+
+
+    })
+  }
+</script>
+
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Masai Grading System 3</title>
+    <style>
+    </style>
+  </head>
+
+  <body>
+    <div id="container">
+      <div>
+        <h1>Masai Evaluations Tracker</h1>
+        <p>Total Students: <span>0</span></p>
+        <p>Average Score: <span>0</span></p>
+        <form id="form">
+          <!-- When this form get submitted update the DOM According to the question -->
+          <input placeholder="Name" id="name" type="text" />
+          <select id="batch">
+            <option value="WEB16">WEB16</option>
+            <option value="WEB17">WEB17</option>
+            <option value="WEB18">WEB18</option>
+          </select>
+          <select id="type">
+            <option value="DSA">DSA</option>
+            <option value="Coding">Coding</option>
+          </select>
+          <input placeholder="Student Code" id="student_code" type="text" />
+          <select id="unit">
+            <option value="Unit-1">Unit-1</option>
+            <option value="Unit-2">Unit-2</option>
+            <option value="Unit-3">Unit-3</option>
+            <option value="Unit-4">Unit-4</option>
+          </select>
+          <select id="sprint">
+            <option value="Sprint-1">Sprint-1</option>
+            <option value="Sprint-2">Sprint-2</option>
+            <option value="Sprint-3">Sprint-3</option>
+            <option value="Sprint-4">Sprint-4</option>
+          </select>
+          <input placeholder="Score(0-10)" id="score" type="number" />
+          <input type="submit" />
+        </form>
+        <button>Delete All</button>
+      </div>
+      <div id="reports">
+        <!-- All the cards that get appended with Javascript on form submit goes here -->
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  // store the data
+  // 1. catch the form
+  // 2. get data
+  // 3. store it
+  // empty array is created to store all students 
+  let student_data = JSON.parse(localStorage.getItem('students'))||[];
+  // we are using ||[] so that we get an empty array when nothing is stored in the local storage.
+  console.log(student_data);
+  let form = document.querySelector("#form");
+
+  displayData(student_data);
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    
+    // form_data is temperory variable (object) that we are using to store form data.
+    let form_data = {
+      name: form.name.value,
+      batch: form.batch.value,
+      type: form.type.value,
+      code: form.student_code.value,
+      unit: form.unit.value,
+      sprint: form.sprint.value,
+      score: form.score.value,
+    };
+    // we don't want to store empty data so if-else condition.
+    if (
+      form_data.name == "" ||
+      form_data.batch == "" ||
+      form_data.type == "" ||
+      form_data.code == "" ||
+      form_data.unit == "" ||
+      form_data.sprint == "" ||
+      form_data.score == ""
+    ) {
+      alert("please fill all details");
+    } else {
+      student_data.push(form_data);
+      localStorage.setItem('students',JSON.stringify(student_data));
+      // we are done with storing data inside the array, but we want to display it on DOM.
+      displayData(student_data);
+    }
+  });
+
+  // display the data on website||DOM
+  // 1.we need to catch the parent element
+  // 2. create new HTML elements
+  // 3. give values to new elements
+  // 4. append the new elements to parent
+  // 5. append the parent to HTML document
+  // let's assume our data is array.
+  // as our data is array, we need to run a forEach loop inside and create new divs for every element.
+  function displayData(data) {
+    let report = document.querySelector("#reports");
+    // we are creating a new count variable to store the total count of students. 
+    // we are then updating the values on DOM using textContent. 
+    // We are writing this code inside displayData because we want to update the values dynamically whenever we are changing something in DOM. 
+    let count = document.querySelector('h1+p>span');
+    count.textContent = data.length;
+    let totalScore = 0;
+    data.forEach(function(el){
+      // we are converting el.score into number because we converted it into string while storing it in local storage
+      totalScore += +(el.score);
+    })
+    // we are cathing the second span
+    let avg = document.querySelector('h1+p+p>span');
+    
+    if(count.textContent==0){
+      avg.textContent =0;
+    }
+    else{
+      avg.textContent = totalScore/count.textContent;
+    }
+    // we are emptying the displayed Data using null to avoid duplicate cards.
+    report.innerHTML = null;
+
+    data.forEach(function (el,index) {
+
+      let card = document.createElement("div");
+      let name = document.createElement("h1");
+      name.innerText = el.name;
+      let batch = document.createElement("p");
+      batch.innerText = el.batch;
+      let type = document.createElement("p");
+      type.innerText = el.type;
+      let code = document.createElement("p");
+      code.innerText = el.code;
+      let unit = document.createElement("p");
+      unit.innerText = el.unit;
+      let sprint = document.createElement("p");
+      sprint.innerText = el.sprint;
+      let score = document.createElement("p");
+      score.innerText = el.score;
+      let status = document.createElement("h3");
+      let btn = document.createElement("button");
+      btn.innerText = "Delete";
+      btn.addEventListener("click", function () {
+        // whenever this button is clicked, i'm calling this deleteData function and telling it to delete student who is having this index
+        deleteData(index);
+      });
+
+      if (el.score <= 3) {
+        status.innerText = "Learning";
+        status.style.color = "red";
+      } else if (el.score >= 4 && el.score <= 7) {
+        status.innerText = "Achieving";
+        status.style.color = "orange";
+      } else {
+        status.innerText = "Mastery";
+        status.style.color = "green";
+      }
+      card.append( name, batch, type, code, unit, sprint, score, status, btn);
+      report.append(card);
+    });
+  }
+
+  // deleteData
+  // 1.get address of the data
+  // 2. remove the data || filter the data based on address.
+  // 3. we are updating DOM with new data.
+// 4. here index is the adress of the student we want to delete.
+// 5. we are getting the adress from the forEach loop.
+  function deleteData(index) {
+    student_data = student_data.filter(function (el, i) {
+      return i !== index;
+    });
+    // till line 149 we are doing everything in JS, now we want to update DOM
+    // we are storing the data again to replace the old data with new array.
+    
+    localStorage.setItem('students',JSON.stringify(student_data));
+    displayData(student_data);
+  }
+</script>
+
+
+

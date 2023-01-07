@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title> promise </title>
+    </head>
+    <body>
+
+    </body>
+</html>
+
+<script>
+    let count = 7;
+   let countPromise = new Promise(function(resolve , reject){
+     if(count > 0){
+        resolve("My promise is resolved");
+     }
+     else{
+        reject("My promise has been rejected");
+     }
+   });
+   
+   countPromise
+   .then((fromResolve) => console.log(fromResolve))
+   .catch((fromReject) => console.log(fromReject));
+</script>

@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>Dom 3</title>
+    </head>
+    <body>
+        <form>
+            <input id="name" placeholder="Enter name"/>
+            <input id="mobile" type="Number" placeholder="Enter mobile number"/>
+            <input type="submit">
+        </form>
+           
+        <h1></h1>
+        <h2></h2>
+
+
+    </body>
+    <script>
+        document.querySelector("form").addEventListener("submit",myFunction);
+
+        function myFunction() {
+            event.preventDefault()
+         var name=document.querySelector("#name").value;
+         var mob=document.querySelector("#mobile").value;
+         document.querySelector("h1").innerText=name;
+         document.querySelector("h2").innerText=mob;
+         
+        }
+
+    </script>
+</html>

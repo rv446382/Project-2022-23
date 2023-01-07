@@ -1,0 +1,133 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0%;
+            padding:0%;
+            background-color: black;
+
+
+        }
+        .container{
+            margin:100px auto;
+            text-align:center;
+        }
+        h1{
+            font-size: 70px;
+            color:white;
+        }
+
+        p{
+            font-size:90px;
+            color:red;
+        }
+        button{
+            border:0px;
+            padding:18px 10px;
+            font-size:30px;
+            width:180px;
+            margin:10px;
+        }
+        button:hover{
+            cursor:pointer;
+            background-color:#1A73E8;
+            color:whitesmoke;
+            border:0px;
+
+
+
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Java script stopwatch</h1>
+        <p><span id="minutes">00</span>:<span id="seconds">00</span>:<span id="tens">00</span></p>
+        <button id="btn-start">Start</button>
+        <button id="btn-stop">Stop</button>
+        <button id="btn-reset">Reset</button>
+
+    </div>
+    
+</body>
+</html>
+<script>
+var minutes =00;
+var seconds = 00;
+var tens = 00;
+var OutputMinutes = document.getElementById('minutes');
+var OutputSeconds = document.getElementById('seconds');
+var OutputTens = document.getElementById('tens');
+var buttonStart = document.getElementById('btn-start');
+var buttonStop = document.getElementById('btn-stop');
+var buttonReset = document.getElementById('btn-reset');
+var Interval;
+
+buttonStart.addEventListener('click', () =>{
+    clearInterval(Interval);
+    Interval = setInterval(startTime, 100);
+});
+
+buttonStop.addEventListener('click', () =>{
+    clearInterval(Interval);
+});
+
+buttonReset.addEventListener('click', () =>{
+    clearInterval(Interval);
+    minutes = "00";
+    tens = "00";
+    seconds = "00";
+    OutputMinutes.innerHTML =minutes
+    OutputSeconds.innerHTML = seconds;
+    OutputTens.innerHTML = tens;
+
+});
+
+function startTime(){
+    tens++;
+    if(tens <= 9){
+        OutputTens.innerHTML =  "0" + tens;
+
+    }
+
+    if(tens > 9){
+        OutputTens.innerHTML = tens;
+    }
+
+    if(tens > 59){
+        seconds++;
+        OutputSeconds.innerHTML = "0" + seconds;
+        tens = 0;
+        OutputTens.innerHTML = "0" + tens;
+
+    }
+
+    if(seconds <= 9){
+        OutputSeconds.innerHTML = "0" + seconds;
+
+    }
+    if(seconds> 9){
+        OutputSeconds.innerHTML = seconds;
+
+    }
+     if(seconds > 59){
+        minutes++;
+        OutputMinutes.innerHTML = "0" + minutes;
+        seconds = 0;
+        OutputSeconds.innerHTML = "0" + seconds;
+        tens = 0;
+        OutputTens.innerHTML = "0" + tens;
+
+    }
+
+
+}
+
+
+</script>

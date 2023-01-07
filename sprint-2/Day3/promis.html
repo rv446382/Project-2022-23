@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title> promise </title>
+    </head>
+    <body>
+
+    </body>
+</html>
+
+<script>
+    let x = 20;
+   let xPromise = new Promise(function(resolve , reject){
+     if(x%2==0){
+        resolve("My promise is resolved");
+     }
+     else{
+        reject("My promise has been rejected");
+     }
+   });
+   
+   xPromise
+   .then((fromResolve) => console.log(fromResolve))
+   .catch((fromReject) => console.log(fromReject));
+</script>

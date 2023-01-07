@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart Page</title>
+    <style>
+      /* Write all necessery css here  */
+      #cart-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+
+    }
+
+    #cart-container>div>img {
+      width: 80%;
+    }
+
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <h1>Masai E-Commerce</h1>
+      <a href="./index.html">Home</a>
+      <a href="./cart.html">Cart</a>
+    </div>
+    <h1 id="total">Your Total cart Price is:- <span id="cart-total">0</span></h1>
+    <div id="cart-container">
+      <!-- Here Append All the cart Products  -->
+    </div>
+  </body>
+  <script>
+    // Write all necessery JS here 
+
+    cartData = JSON.parse(localStorage.getItem("cart"))||[];
+    displayData(cartData)
+    function displayData(data) {
+      let parent = document.querySelector("#cart-container");
+    parent.innerHTML = null;
+    data.forEach((ele ,index) => {
+      let form = document.createElement("div");
+
+      let img = document.createElement("img");
+      img.setAttribute("src", ele.img);
+
+      let brand = document.createElement("h2");
+      brand.textContent = ele.brand;
+
+      let price = document.createElement("h3");
+      price.textContent = ele.price;
+
+
+      let details = document.createElement("p");
+      details.textContent = ele.details;
+
+
+      let category = document.createElement("h4");
+      category.textContent = ele.category;
+
+
+      let add = document.createElement('button');
+      add.textContent = "+";
+
+      add.addEventListener("click",function(event){
+        ele[1]++;
+        console.log(qty)
+      
+      })
+      
+      let qty = document.createElement("span");
+      qty.textContent = ele[1];
+
+      
+      let minus = document.createElement("button");
+      minus.textContent = "-";
+
+      let remove = document.createElement("button");
+     remove.textContent = "Remove";
+
+     remove.addEventListener("click",function(event){
+      Delete(ele,index);
+     })
+
+      form.append(img, brand, price, details, category , add , qty , minus,remove);
+      parent.append(form);
+    })
+
+  }
+  function Delete(ele,index){
+    cartData = cartData.filter((el,i) => {
+    return i !== index;
+    })
+    displayData(cartData)
+    localStorage.setItem("cartData",JSON.stringify(cartData))
+  }
+  </script>
+</html>

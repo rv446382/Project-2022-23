@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>OTP</title>
+    </head>
+    <body>
+    <input type="number"/>
+    <button onClick="checkOTP()">submit</button>
+    </body>
+</html>
+<script>
+    function checkOTP(){
+        let otp = document.querySelector("input").value;
+        let otpPromise = new Promise((resolve, reject) => {
+            if(otp == "1234"){
+                resolve("OTP is correct");
+            }else{
+                reject("OTP is incorrect");
+            }
+        })
+        otpPromise.then((val) => alert(val)).catch((val) => alert(val));
+        
+            
+                
+        
+                
+
+    }
+            
+        
+    
+</script>

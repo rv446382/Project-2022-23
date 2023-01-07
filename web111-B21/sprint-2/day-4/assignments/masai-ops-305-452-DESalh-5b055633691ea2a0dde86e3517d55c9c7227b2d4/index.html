@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign up Page</title>
+  <style>
+      /* Write all necessery css here  */
+      form input{
+        width: 200px;
+        text-decoration:aliceblue;
+      }
+      a{
+       text-decoration: none;
+        width: 100px;
+      }
+      img{
+        width: 80%;
+      }
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <a href="./index.html">Signup</a>
+    <a href="./signin.html">Signin</a>
+  </div>
+  <div id="signup">
+    <h1>Please Enter Your Details</h1>
+    <form >
+      <input type="text" id="name" placeholder="Name" required><br>
+      <input type="email" id="email" placeholder="Email" required><br>
+      <input type="password"  id="password" placeholder="******" required><br>
+     <!--  <input type="password"  id="passwordChk" placeholder="******" required><br> -->
+      <input type="submit" value="Submit" />
+    </form>
+    <img src="https://unsplash.com/photos/ML9i2RqN9hg" alt="">
+  </div>
+</body>
+
+
+</html>
+<script src="./script.js">
+
+// let users = JSON.parse(localStorage.getItem("usersData"))||[];
+// signUp.addEventListener("submit", function (event) {
+//     // we preventDefault() to stop page from refreshing
+//     event.preventDefault();
+//     // we check whether the email is in our database or not
+//     let count = 0;
+
+//     // if we found a user we alert
+//     if (count > 0) {
+//         alert("user already registered!");
+//     }
+//     // if users not found || email not found 
+//     else { 
+//         // we are checking if both passwords are same or not.
+
+//         // we create an obj to store data of the user
+//         let user = {
+//             name: signUp.name.value,
+//             email: signUp.email.value,
+//             password: signUp.password.value,
+//         };
+//         if (user.name == "" ||
+//             user.email == "" ||
+//             user.password == ""
+//         ) {
+//             alert("Fill all Details");
+//         }
+//         else {
+//                   //console.log(Form)
+//                   users.push(user);
+//                   localStorage.setItem("usersData", JSON.stringify(users));
+//                   alert("Sign Up successful!");
+//                   signUp.reset();
+//                   window.location.assign("./signin.html")
+//                 }
+//                } });
+  
+</script>

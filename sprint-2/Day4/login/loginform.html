@@ -1,0 +1,103 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color:aqua;
+            
+        }
+        .container{
+            width:400px;
+            display: flex;
+            border:none;
+            text-align: center;
+           text-decoration: none;
+            padding:90px;
+            margin:50 auto;
+            padding-top: 150px;
+            margin-top: 120px;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            background-color:gold;
+            width:fit-content;
+            padding-bottom: 80px;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form onsubmit="loginfun()">
+            <div class="avtar">
+                <img src="https://static.vecteezy.com/system/resources/previews/000/518/208/original/man-working-with-computer-bright-colorful-vector-illustration.jpg" alt="" style="width:70px;">
+
+            </div>
+            <label for="username">Username</label><br>
+            <input type="text" name="username" id="username" style="width:200px;"/><br>
+            
+            <!-- <label for="email">Email</label><br>
+            <input type="email" name="email" id="email"/><br> -->
+
+            <label for="password">password</label><br>
+            <input type="password" name="password" id="password" style="width:200px;"/><br>
+            <hr>
+            <button type="submit" >Login</button>
+            <P id="result">Welcome, Login...</P>
+
+        </form>
+
+    </div>
+    
+</body>
+</html>
+<script src="./main.js">
+//     function signup(e){
+//     event.preventDefault();
+
+//     var email = document.getElementById('email').value;
+//     var username = document.getElementById('username').value;
+//     var pass= document.getElementById('password').value;
+//     var user = {
+//         email:email,
+//         username:username,
+//         password:pass,
+//     }
+
+//     var json = JSON.stringify(user);
+//     localStorage.setItem(username,json);
+//     console.log("user added");
+
+// }
+// function loginfun(e){
+//     event.preventDefault();
+//     // console.log(123);
+
+   
+//     var username = document.getElementById('username').value;
+//     var pass= document.getElementById('password').value;
+//     var result = document.getElementById('result');
+    
+
+//     var user=localStorage.getItem(username);
+//     var data = JSON.parse(user);
+//     console.log(data);
+    
+
+//     if(user == null){
+//         result.innerHTML = "wrong username";
+//     }
+//     else if( username == data.username && pass == data.password){
+//         result.innerHTML = "logged in successfully" 
+        
+
+//     } else{
+//         result.innerHTML = "wrong password";
+//     }
+// }
+   
+
+
+</script>
